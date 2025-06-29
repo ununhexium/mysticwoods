@@ -10,6 +10,8 @@ import dev.c15u.gdx.mystic.component.AnimationComponent
 import dev.c15u.gdx.mystic.component.AnimationModel
 import dev.c15u.gdx.mystic.component.PlayerAnimationType
 import dev.c15u.gdx.mystic.component.ImageComponent
+import dev.c15u.gdx.mystic.resource.PlayerAnimation
+import dev.c15u.gdx.mystic.resource.Slime
 import dev.c15u.gdx.mystic.system.AnimationSystem
 import dev.c15u.gdx.mystic.system.RenderSystem
 import ktx.app.KtxScreen
@@ -45,11 +47,22 @@ class GameScreen : KtxScreen {
         world.entity {
             it += ImageComponent(
                 Image().apply {
-                    setSize(4f, 4f)
+                    setSize(6f, 6f)
                 }
             )
             it += AnimationComponent().also {
-                it.nextAnimation(AnimationModel.PLAYER, PlayerAnimationType.IDLE_FRONT)
+                it.nextAnimation(PlayerAnimation.walk_back)
+            }
+        }
+        world.entity {
+            it += ImageComponent(
+                Image().apply {
+                    setSize(4f, 4f)
+                    setPosition(5f,5f)
+                }
+            )
+            it += AnimationComponent().also {
+                it.nextAnimation(Slime.move_front)
             }
         }
     }
