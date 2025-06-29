@@ -10,7 +10,6 @@ data class ImageComponent(
     val image: Image
 ) : Component<ImageComponent>, Comparable<ImageComponent> {
 
-
     override fun compareTo(other: ImageComponent): Int {
         val yDiff = other.image.y.compareTo(this.image.y)
         return if (yDiff != 0) yDiff else other.image.x.compareTo(this.image.x)

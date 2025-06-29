@@ -34,7 +34,7 @@ prettyPrint=false
 legacyOutput=false
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:sprites/characters/player.png,type:Input,regionName:null},{path:sprites/characters/slime.png,type:Input,regionName:null}]
+inputFiles=[{path:game,type:Input,dirFilePrefix:null,recursive:true,flattenPaths:false}]
 keepInputFileExtensions=false
 
 
