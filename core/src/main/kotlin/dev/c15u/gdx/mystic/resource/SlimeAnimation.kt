@@ -1,6 +1,6 @@
 package dev.c15u.gdx.mystic.resource
 
-enum class Slime(override val id: String) : AnimationRef {
+enum class SlimeAnimation(override val id: String) : AnimationRef {
     death("slime/death"),
     hit_back("slime/hit_back"),
     hit_front("slime/hit_front"),

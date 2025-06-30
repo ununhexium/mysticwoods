@@ -1,22 +1,28 @@
 package dev.c15u.gdx.mystic.screen
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
+import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.github.quillraven.fleks.configureWorld
 import dev.c15u.gdx.mystic.component.AnimationComponent
-import dev.c15u.gdx.mystic.component.AnimationModel
-import dev.c15u.gdx.mystic.component.PlayerAnimationType
 import dev.c15u.gdx.mystic.component.ImageComponent
+import dev.c15u.gdx.mystic.event.MapChangeEvent
 import dev.c15u.gdx.mystic.resource.PlayerAnimation
-import dev.c15u.gdx.mystic.resource.Slime
+import dev.c15u.gdx.mystic.resource.SlimeAnimation
 import dev.c15u.gdx.mystic.system.AnimationSystem
 import dev.c15u.gdx.mystic.system.RenderSystem
 import ktx.app.KtxScreen
 import ktx.assets.disposeSafely
 import ktx.log.logger
+
+private fun Stage.fire(map: TiledMap): Boolean {
+    return this.root.fire(MapChangeEvent(map))
+}
 
 class GameScreen : KtxScreen {
 
@@ -44,6 +50,16 @@ class GameScreen : KtxScreen {
     }
 
     override fun show() {
+
+        world.systems.forEach { system ->
+            if (system is EventListener) {
+                stage.addListener(system)
+            }
+        }
+        val map = TmxMapLoader().load("maps/map1.tmx")
+        stage.fire(map)
+
+
         world.entity {
             it += ImageComponent(
                 Image().apply {
@@ -58,11 +74,11 @@ class GameScreen : KtxScreen {
             it += ImageComponent(
                 Image().apply {
                     setSize(4f, 4f)
-                    setPosition(5f,5f)
+                    setPosition(5f, 5f)
                 }
             )
             it += AnimationComponent().also {
-                it.nextAnimation(Slime.move_front)
+                it.nextAnimation(SlimeAnimation.move_front)
             }
         }
     }
