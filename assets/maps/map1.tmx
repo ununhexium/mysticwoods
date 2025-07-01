@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="7">
  <tileset firstgid="1" source="../../assets_raw/map.tsx"/>
+ <tileset firstgid="151" name="entities" tilewidth="48" tileheight="48" tilecount="2" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image source="../graphics/entities/player.png" width="48" height="48"/>
+  </tile>
+  <tile id="1">
+   <image source="../graphics/entities/slime.png" width="32" height="32"/>
+  </tile>
+ </tileset>
  <layer id="1" name="ground" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJxTYGBgUBjFo3gUj+JRPIpH8SgexVTDAEQASwE=
@@ -16,4 +25,12 @@
    eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
   </data>
  </layer>
+ <objectgroup id="4" name="entities">
+  <object id="1" type="Player" gid="151" x="50.2641" y="250" width="48" height="48"/>
+  <object id="2" type="Slime" gid="152" x="181.406" y="215.996" width="32" height="32"/>
+  <object id="3" type="Slime" gid="152" x="134.968" y="109.245" width="32" height="32"/>
+  <object id="4" type="Slime" gid="152" x="282.052" y="35.7961" width="32" height="32"/>
+  <object id="5" type="Slime" gid="152" x="417.849" y="293.145" width="32" height="32"/>
+  <object id="6" type="Slime" gid="152" x="61.8893" y="186.765" width="32" height="32"/>
+ </objectgroup>
 </map>

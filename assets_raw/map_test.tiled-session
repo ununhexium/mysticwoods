@@ -19,7 +19,7 @@
         }
     },
     "last.externalTilesetPath": "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets_raw",
-    "last.imagePath": "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/graphics",
+    "last.imagePath": "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/graphics/entities",
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": null,
     "map.tileHeight": 16,
@@ -33,6 +33,7 @@
         "map.tsx",
         "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 2,
@@ -40,5 +41,6 @@
     "tileset.tileSize": {
         "height": 16,
         "width": 16
-    }
+    },
+    "tileset.type": 1
 }

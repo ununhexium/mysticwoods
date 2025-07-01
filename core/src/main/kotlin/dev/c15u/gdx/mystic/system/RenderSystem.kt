@@ -11,7 +11,9 @@ import com.github.quillraven.fleks.IteratingSystem
 import com.github.quillraven.fleks.World.Companion.family
 import com.github.quillraven.fleks.World.Companion.inject
 import com.github.quillraven.fleks.collection.compareEntity
+import dev.c15u.gdx.mystic.MysticWoods.Companion.UNIT_SCALE
 import dev.c15u.gdx.mystic.component.ImageComponent
+import dev.c15u.gdx.mystic.component.SpawnComponent
 import dev.c15u.gdx.mystic.event.MapChangeEvent
 import ktx.assets.disposeSafely
 import ktx.graphics.use
@@ -20,14 +22,14 @@ import ktx.tiled.forEachLayer
 class RenderSystem(
     private val stage: Stage = inject()
 ) : EventListener, IteratingSystem(
-    family = family { all(ImageComponent) },
+    family = family { all(ImageComponent).none(SpawnComponent) },
     comparator = compareEntity { e1, e2 -> e1[ImageComponent].compareTo(e2[ImageComponent]) }
 ) {
     private val bgLayer = mutableListOf<TiledMapTileLayer>()
     private val fgLayer = mutableListOf<TiledMapTileLayer>()
     private val layers = listOf(bgLayer, fgLayer)
 
-    private val mapRenderer = OrthogonalTiledMapRenderer(null, 1 / 16f, stage.batch)
+    private val mapRenderer = OrthogonalTiledMapRenderer(null, UNIT_SCALE, stage.batch)
     private val orthoCam = stage.camera as OrthographicCamera
 
     override fun onTick() {
