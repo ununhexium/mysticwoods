@@ -13,6 +13,7 @@ import com.github.quillraven.fleks.World.Companion.inject
 import com.github.quillraven.fleks.collection.compareEntity
 import dev.c15u.gdx.mystic.component.ImageComponent
 import dev.c15u.gdx.mystic.event.MapChangeEvent
+import ktx.assets.disposeSafely
 import ktx.graphics.use
 import ktx.tiled.forEachLayer
 
@@ -72,5 +73,9 @@ class RenderSystem(
 
             else -> return false
         }
+    }
+
+    override fun onDispose() {
+        mapRenderer.disposeSafely()
     }
 }

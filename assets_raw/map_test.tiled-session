@@ -1,12 +1,20 @@
 {
-    "activeFile": "map.tsx",
+    "activeFile": "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
+        "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx": {
+            "scale": 5.405104166666666,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.05087783537942,
+                "y": 160.1264237121548
+            }
+        },
         "map.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 1,
+            "scaleInDock": 4,
             "scaleInEditor": 11
         }
     },
@@ -17,11 +25,13 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "map.tsx"
+        "map.tsx",
+        "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx"
     ],
     "project": "map_test.tiled-project",
     "recentFiles": [
-        "map.tsx"
+        "map.tsx",
+        "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
