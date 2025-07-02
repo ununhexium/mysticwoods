@@ -3,6 +3,8 @@ package dev.c15u.gdx.mystic.system
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -14,12 +16,14 @@ import com.github.quillraven.fleks.World.Companion.family
 import dev.c15u.gdx.mystic.MysticWoods.Companion.UNIT_SCALE
 import dev.c15u.gdx.mystic.component.AnimationComponent
 import dev.c15u.gdx.mystic.component.ImageComponent
+import dev.c15u.gdx.mystic.component.PhysicComponent.Companion.physicsComponentFromImage
 import dev.c15u.gdx.mystic.component.SpawnComponent
 import dev.c15u.gdx.mystic.component.SpawnConfig
 import dev.c15u.gdx.mystic.event.MapChangeEvent
 import dev.c15u.gdx.mystic.resource.AnimationRef
 import dev.c15u.gdx.mystic.resource.PlayerAnimation
 import dev.c15u.gdx.mystic.resource.SlimeAnimation
+import ktx.box2d.box
 import ktx.collections.isNotEmpty
 import ktx.math.vec2
 import ktx.tiled.layer
@@ -35,6 +39,7 @@ private val MapObject.worldPosition: Vector2
 class EntitySpawnSystem(
     val stage: Stage,
     val atlas: TextureAtlas,
+    val phWorld: World,
 ) : EventListener, IteratingSystem(
     family = family { all(SpawnComponent) },
 ) {
@@ -56,7 +61,13 @@ class EntitySpawnSystem(
                 it += AnimationComponent().also {
                     it.nextAnimation(cfg.model)
                 }
-                stage.addActor(image)
+
+                it += physicsComponentFromImage(phWorld, image, DynamicBody) { phCmp, w, h ->
+                    box(w, h) {
+                        isSensor = false
+                        friction = 0f
+                    }
+                }
             }
         }
         world -= entity

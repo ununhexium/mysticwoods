@@ -4,18 +4,24 @@
         "."
     ],
     "fileStates": {
+        "": {
+            "scaleInEditor": 4
+        },
         "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx": {
             "scale": 5.405104166666666,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.05087783537942,
+                "x": 228.9502592071538,
                 "y": 160.1264237121548
             }
+        },
+        "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets/maps/map1.tmx#entities": {
+            "scaleInDock": 1
         },
         "map.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 4,
-            "scaleInEditor": 11
+            "scaleInEditor": 4
         }
     },
     "last.externalTilesetPath": "/home/uuh/dev/ununhexium/libgdx/mysticwoods/assets_raw",
