@@ -1,5 +1,6 @@
 package dev.c15u.gdx.mystic.component
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
 import com.badlogic.gdx.scenes.scene2d.ui.Image
@@ -10,9 +11,11 @@ import com.github.quillraven.fleks.EntityCreateContext
 import com.github.quillraven.fleks.World
 import ktx.box2d.BodyDefinition
 import ktx.box2d.body
+import ktx.math.vec2
 import com.badlogic.gdx.physics.box2d.World as PhWorld
 
 class PhysicComponent() : Component<PhysicComponent> {
+    val impulse = vec2()
     lateinit var body: Body
 
     override fun World.onAdd(entity:Entity) {

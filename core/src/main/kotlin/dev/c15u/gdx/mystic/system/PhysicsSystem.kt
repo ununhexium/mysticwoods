@@ -12,7 +12,6 @@ import ktx.math.component2
 import com.badlogic.gdx.physics.box2d.World as PhWorld
 
 class PhysicsSystem(
-    // TODO: try inject
     val phWorld: PhWorld
 ) : IteratingSystem(
     family = family { all(PhysicComponent, ImageComponent) },
@@ -23,17 +22,27 @@ class PhysicsSystem(
             log.error { "autoClearForces must be set to false to guarantee correct physics simulation" }
             phWorld.autoClearForces = false
         }
+        super.onUpdate()
+        phWorld.clearForces()
     }
 
     override fun onTick() {
+        super.onTick()
         phWorld.step(world.deltaTime, 6, 2)
     }
 
     override fun onTickEntity(entity: Entity) {
-        val phys = entity[PhysicComponent]
+        val physicCmp = entity[PhysicComponent]
         val imag = entity[ImageComponent]
 
-        val (bodyX, bodyY) = phys.body.position
+        log.debug { "Impulse ${physicCmp.impulse}" }
+
+        if (!physicCmp.impulse.isZero) {
+            physicCmp.body.applyLinearImpulse(physicCmp.impulse, physicCmp.body.worldCenter, true)
+            physicCmp.impulse.setZero()
+        }
+
+        val (bodyX, bodyY) = physicCmp.body.position
         imag.image.run {
             setPosition(bodyX - width / 2, bodyY - height / 2)
         }

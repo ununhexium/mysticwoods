@@ -23,7 +23,7 @@ class AnimationSystem(
     override fun onTickEntity(entity: Entity) {
         val anim = entity[AnimationComponent]
 
-        log.debug { "Tick anim" }
+//        log.debug { "Tick anim" }
 
         val nextAnimation = anim.nextAnimation
         if (nextAnimation == null) {

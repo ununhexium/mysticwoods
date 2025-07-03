@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
-import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Scaling
 import com.github.quillraven.fleks.Entity
@@ -16,7 +15,9 @@ import com.github.quillraven.fleks.World.Companion.family
 import dev.c15u.gdx.mystic.MysticWoods.Companion.UNIT_SCALE
 import dev.c15u.gdx.mystic.component.AnimationComponent
 import dev.c15u.gdx.mystic.component.ImageComponent
+import dev.c15u.gdx.mystic.component.MoveComponent
 import dev.c15u.gdx.mystic.component.PhysicComponent.Companion.physicsComponentFromImage
+import dev.c15u.gdx.mystic.component.PlayerComponent
 import dev.c15u.gdx.mystic.component.SpawnComponent
 import dev.c15u.gdx.mystic.component.SpawnConfig
 import dev.c15u.gdx.mystic.event.MapChangeEvent
@@ -36,8 +37,7 @@ private val MapObject.worldPosition: Vector2
         return vec2(this.x * UNIT_SCALE, this.y * UNIT_SCALE)
     }
 
-class EntitySpawnSystem(
-    val stage: Stage,
+class SpawnSystem(
     val atlas: TextureAtlas,
     val phWorld: World,
 ) : EventListener, IteratingSystem(
@@ -68,6 +68,14 @@ class EntitySpawnSystem(
                         friction = 0f
                     }
                 }
+
+                if (cfg.speed > 0f) {
+                    it += MoveComponent(cfg.speed, vec2())
+                }
+
+                if (type == "Player") {
+                    it += PlayerComponent()
+                }
             }
         }
         world -= entity
@@ -76,8 +84,8 @@ class EntitySpawnSystem(
     private fun spawnConfig(type: String): SpawnConfig {
         return cachedCfgs.getOrPut(type) {
             when (type) {
-                "Player" -> SpawnConfig(PlayerAnimation.idle_front)
-                "Slime" -> SpawnConfig(SlimeAnimation.idle_front)
+                "Player" -> SpawnConfig(PlayerAnimation.idle_front, 7f)
+                "Slime" -> SpawnConfig(SlimeAnimation.idle_front, 5f)
                 else -> error("Unknown spawn type: $type")
             }
         }

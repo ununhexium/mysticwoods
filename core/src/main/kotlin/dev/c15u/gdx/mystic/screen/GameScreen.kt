@@ -9,13 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.utils.viewport.ExtendViewport
-import com.github.quillraven.fleks.World
 import com.github.quillraven.fleks.World.Companion.inject
 import com.github.quillraven.fleks.configureWorld
 import dev.c15u.gdx.mystic.event.MapChangeEvent
+import dev.c15u.gdx.mystic.input.KeyboardInputProcessor
 import dev.c15u.gdx.mystic.system.AnimationSystem
 import dev.c15u.gdx.mystic.system.DebugSystem
-import dev.c15u.gdx.mystic.system.EntitySpawnSystem
+import dev.c15u.gdx.mystic.system.SpawnSystem
+import dev.c15u.gdx.mystic.system.MoveSystem
 import dev.c15u.gdx.mystic.system.PhysicsSystem
 import dev.c15u.gdx.mystic.system.RenderSystem
 import ktx.app.KtxScreen
@@ -46,7 +47,8 @@ class GameScreen : KtxScreen {
         }
 
         systems {
-            add(EntitySpawnSystem(inject(), inject(), inject()))
+            add(SpawnSystem(inject(), inject()))
+            add(MoveSystem())
             add(PhysicsSystem(inject()))
             add(AnimationSystem(inject()))
             add(RenderSystem(inject()))
@@ -69,6 +71,8 @@ class GameScreen : KtxScreen {
         currentMap?.let {
             stage.fire(MapChangeEvent(it))
         }
+
+        KeyboardInputProcessor(world)
     }
 
     override fun resize(width: Int, height: Int) {
