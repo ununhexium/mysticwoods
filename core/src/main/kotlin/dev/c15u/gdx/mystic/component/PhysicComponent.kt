@@ -15,6 +15,7 @@ import ktx.math.vec2
 import com.badlogic.gdx.physics.box2d.World as PhWorld
 
 class PhysicComponent() : Component<PhysicComponent> {
+    val prevPos = vec2()
     val impulse = vec2()
     lateinit var body: Body
 
