@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Scaling
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
 import com.github.quillraven.fleks.World.Companion.family
+import com.github.quillraven.fleks.World.Companion.inject
 import dev.c15u.gdx.mystic.MysticWoods.Companion.UNIT_SCALE
 import dev.c15u.gdx.mystic.component.AnimationComponent
 import dev.c15u.gdx.mystic.component.ImageComponent
@@ -38,8 +39,8 @@ private val MapObject.worldPosition: Vector2
     }
 
 class SpawnSystem(
-    val atlas: TextureAtlas,
-    val phWorld: World,
+    val atlas: TextureAtlas = inject(),
+    val phWorld: World = inject(),
 ) : EventListener, IteratingSystem(
     family = family { all(SpawnComponent) },
 ) {

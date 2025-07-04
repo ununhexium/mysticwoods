@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
 import com.github.quillraven.fleks.World.Companion.family
+import com.github.quillraven.fleks.World.Companion.inject
 import dev.c15u.gdx.mystic.component.AnimationComponent
 import dev.c15u.gdx.mystic.component.ImageComponent
 import ktx.app.gdxError
@@ -13,7 +14,7 @@ import ktx.collections.map
 import ktx.log.logger
 
 class AnimationSystem(
-    private val textureAtlas: TextureAtlas
+    private val textureAtlas: TextureAtlas = inject()
 ) : IteratingSystem(
     family = family { all(AnimationComponent, ImageComponent) },
 ) {

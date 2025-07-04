@@ -14,6 +14,7 @@ import com.github.quillraven.fleks.configureWorld
 import dev.c15u.gdx.mystic.event.MapChangeEvent
 import dev.c15u.gdx.mystic.input.KeyboardInputProcessor
 import dev.c15u.gdx.mystic.system.AnimationSystem
+import dev.c15u.gdx.mystic.system.CameraSystem
 import dev.c15u.gdx.mystic.system.DebugSystem
 import dev.c15u.gdx.mystic.system.SpawnSystem
 import dev.c15u.gdx.mystic.system.MoveSystem
@@ -47,12 +48,13 @@ class GameScreen : KtxScreen {
         }
 
         systems {
-            add(SpawnSystem(inject(), inject()))
+            add(SpawnSystem())
             add(MoveSystem())
-            add(PhysicsSystem(inject()))
-            add(AnimationSystem(inject()))
-            add(RenderSystem(inject()))
-            add(DebugSystem(inject(), inject()))
+            add(PhysicsSystem())
+            add(AnimationSystem())
+            add(CameraSystem())
+            add(RenderSystem())
+            add(DebugSystem())
         }
     }
 

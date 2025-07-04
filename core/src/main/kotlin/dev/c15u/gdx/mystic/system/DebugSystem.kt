@@ -4,11 +4,12 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.github.quillraven.fleks.IntervalSystem
+import com.github.quillraven.fleks.World.Companion.inject
 import ktx.assets.disposeSafely
 
 class DebugSystem(
-    private val phWorld: World,
-    private val stage: Stage,
+    private val phWorld: World = inject(),
+    private val stage: Stage = inject(),
 ) : IntervalSystem(enabled = true) {
 
     private lateinit var physicsRenderer: Box2DDebugRenderer
